@@ -3,201 +3,77 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>PG_RD</title>
+  <title>多頁面網站範本</title>
   <link rel="stylesheet" href="css\style.css">
 </head>
 
 <body>
-  <div class="container">
-    <!-- 左側欄位 -->
 
-    <div class="sidebar">
-
-      <div class="project" data-title="Azure 與 Unity 製作的AI Agent">
-        <div class="big-btn">Azure AI Agent</div>
-        <div class="mid-btns">
-
-          <div class="mid-btn">Azure問題</div>
-          <div class="small-btns">
-            <div class="small-btn" data-target="content-a3">Azure的計費機制</div>
-            <div class="small-btn" data-target="content-a4">LLM回答內容</div>
-            <div class="small-btn" data-target="content-a5">語系強制定義</div>
-            <div class="small-btn" data-target="content-a6">自訂語音</div>
-            <div class="small-btn" data-target="content-a7">RAG實作</div>
-            <div class="small-btn" data-target="content-a8">Viseme 嘴型 </div>
-          </div>
-
-          <div class="mid-btn">專案架構</div>
-          <div class="small-btns">
-            <div class="small-btn" data-target="content-a1">Azure</div>
-            <div class="small-btn" data-target="content-a2">Unity</div>
-          </div>
-
-        </div>
+  <div class="main_container">
+    <div class="ko_title">
+      <div class="btn" id="btn_1">
+        <p>token的計算方式與計費</p>
       </div>
 
-      <div class="project" data-title="WebAR">
-        <div class="big-btn">WebAR</div>
-        <div class="mid-btns">
-          <div class="mid-btn">專案架構</div>
-          <div class="small-btns">
-            <div class="small-btn" data-target="content-b1">圖片偵測</div>
-            <div class="small-btn" data-target="content-b2">平面偵測</div>
-          </div>
+      <div class="btn" id="btn_2">
+        <p>回答時可以出現的內容</p>
+      </div>
 
-          <div class="mid-btn">相關技術</div>
-          <div class="small-btns">
-            <div class="small-btn" data-target="content-b3">Aframe</div>
-            <div class="small-btn" data-target="content-b4">MindAR</div>
-            <div class="small-btn" data-target="content-b5">Three.js</div>
-          </div>
-        </div>
+      <div class="btn" id="btn_3">
+        <p>文字的簡中/繁中等語系強制定義</p>
+      </div>
+
+      <div class="btn" id="btn_4">
+        <p>有沒有辦法做RAG</p>
+      </div>
+
+      <div class="btn" id="btn_5">
+        <p>檢測範圍需不需要定義</p>
+      </div>
+
+      <div class="btn" id="btn_6">
+        <p>Viseme 嘴型</p>
       </div>
     </div>
 
-    <!-- 右側內容區 -->
     <div class="content">
-      <div class="title">
-        <h1 id="content-title">請選擇專案</h1>
-      </div>
-      <div class="content-body">
-        <div class="time" id="time">請選擇技術</div>
-        <div id="content-text">
-          <p>這裡會顯示技術內容...</p>
+        <!-- A1 -->
+      <div id="content_1">
+        <div id="q1">
+          <h1>Q1：確認token 的計算方式與計費，包含 文字、圖片... 在Azure 裡的算法</h1>
+        </div>
+        <div id="a1">
+          <a href="https://azure.microsoft.com/zh-tw/pricing/calculator/">定價機算機</a>
+          <a href="https://learn.microsoft.com/zh-tw/azure/cost-management-billing/costs/pricing-calculator">使用 Azure
+            定價計算機來預估成本</a>
+          <a href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest">opan ai 模型</a>
         </div>
       </div>
+
+       <!-- A2 -->
+     <div id="content_2">
+        <div id="q2">
+          <h1>Q1：回答時可以出現的內容 ( 除文字外，還有沒有其他的，比如圖片或影片)</h1>
+        </div>
+        <div id="a2">
+          <a href="https://azure.microsoft.com/zh-tw/pricing/calculator/">定價機算機</a>
+          <a href="https://learn.microsoft.com/zh-tw/azure/cost-management-billing/costs/pricing-calculator">使用 Azure
+            定價計算機來預估成本</a>
+          <a href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest">opan ai 模型</a>
+        </div>
+      </div>
+        <!-- A3 -->
+
+        <!-- A4 -->
+
+        <!-- A5 -->
+
+        <!-- A6 -->
     </div>
+
   </div>
 
-  <!-- 主要內容區 -->
-  <div id="hidden-contents" style="display:none;">
-    <div id="content-a1" data-time="2025-10-17">
-      <h3 class="subtitle">主要流程</h3>
-      <p class="littletitle">建構流程</p>
-      <ol>
-        <li>Azure創建的資源</li>
-        <li>獲取金鑰</li>
-        <li>使用Unity 透過REST ful 向Azure發送相關請求</li>
-      </ol>
 
-      <p class="littletitle">Azure創建的資源</p>
-      <ul>
-        <li> Open AI LLM</li>
-        <li> Text To Speech</li>
-        <li> Speech To Text</li>
-        <li> Custom Vision</li>
-      </ul>
-    </div>
-    <div id="content-a2" data-time="2025-10-17">
-      <h3 class="subtitle">Unity架構</h3>
-      <p class="littletitle">Manager類別</p>
-      <ol>
-        <li>Mainmanger ：負責切換場警</li>
-        <li>EventBus：提供事件訂閱發送</li>
-      </ol>
-    </div>
-
-
-    <div id="content-a3" data-time="2025-10-17">
-      <h3 class="subtitle">Azure的計費機制</h3>
-      <p>在 Azure OpenAI Service 中，token 是依照輸入與輸出的文字量計算，不同模型與媒體類型（文字、圖片、語音）計費方式不一：</p>
-      <p class="littletitle">文字模型（如 GPT-4、GPT-4-turbo、GPT-3.5</p>
-      <ul>
-        <li>分為 Prompt tokens（輸入） 與 Completion tokens（輸出）。</li>
-        <li>費用依據模型而異（例如 GPT-4-turbo 約 $0.01/1K tokens 輸入，$0.03/1K tokens 輸出）。</li>
-      </ul>
-
-      <p class="littletitle">圖片生成（DALL·E）</p>
-      <ul>
-        <li>按「生成張數」與「解析度」計費，不以 token 計算</li>
-        <li>256×256、512×512、1024×1024 各有不同費率（約 $0.016~$0.08 / 張）</li>
-      </ul>
-
-
-      <p class="littletitle">語音 / 語音轉文字（Speech to Text / TTS）</p>
-      <ul>
-        <li>依「秒數」或「文字字數」計價，不計 token</li>
-        <li>Speech to Text：約 $1 / 小時音訊。</li>
-        <li>Text to Speech：約 $16 / 百萬字元（視語音品質不同）</li>
-      </ul>
-
-      <img src="src\costanalysis_charts.png" style="width: 100%;">
-
-      <h3 class="sorucelink">相關連結</h3>
-      <ul>
-        <li> <a href="https://azure.microsoft.com/zh-tw/pricing/calculator/">定價機算機</a>
-        </li>
-        <li><a href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest">opan ai 模型</a>
-        </li>
-      </ul>
-    </div>
-
-    <div id="content-a4" data-time="2025-10-17">
-      <h3 class="subtitle">回答時除文字外，是否可以呈現圖片或影片等其他內容</h3>
-      <P>C回答的內容除了文字外，可以是圖片或影片</P>
-    </div>
-
-    <div id="content-a5" data-time="2025-10-17">
-      <h3 class="subtitle">強制指定語言以避免混用</h3>
-      <ul>
-        <li>方式一：Prompt 直接明確指定
-          <p>「請全程以繁體中文回答，請勿出現任何簡體字。」或指定 #zh-tw</p>
-        </li>
-        <li>方式二：API 參數語言標籤
-          <ul>
-            <li>- Azure TTS/ASR、翻譯 API：locale（如 zh-TW、zh-CN）</li>
-            <li>- Azure Speech Service：在 session 設定強制指定 locale: zh-TW</li>
-            <li>- Azure Translator：REST API 輸出時設 to=zh-Hant（繁體中文），或語言自設定</li>
-          </ul>
-        </li>
-      </ul>
-
-      <h3 class="sorucelink">相關連結</h3>
-      <ul>
-        <li> <a href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest">opan ai 模型</a>
-        </li>
-        <li> <a href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest">opan ai 模型</a>
-        </li>
-      </ul>
-
-
-    </div>
-
-    <div id="content-a6" data-time="2025-10-17">
-      <h3 class="subtitle">Azure 語音克隆基本技術</h3>
-      <p>Azure Cognitive Services 的 Custom Neural Voice（自訂神經語音）即提供高階語音克隆能力，允許根據多個語音樣本訓練個人化 TTS
-        音色，適用於客服、遊戲角色、數位分身等用途，但需特殊審批與嚴格資料審查。</p>
-
-      <h3 class="sorucelink">相關連結</h3>
-      <ul>
-        <li>
-          <a href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/custom-neural-voice">什麼是自定義語音？</a>
-        </li>
-        <li> <a href="https://speech.microsoft.com/portal/515313ba48984236874c5bdd25f58bcf/customvoice/overview">嘗試在
-            Azure AI Foundry中自訂語音</a>
-        </li>
-      </ul>
-
-
-
-      <br>
-
-    </div>
-
-
-
-
-    <!-- 以下是B -->
-    <div id="content-b1" data-time="2025-10-17 10:10">
-      <p>圖片偵測</p>
-      <p>使用Aframe與MindAR製作</p>
-    </div>
-    <div id="content-b2" data-time="2025-10-17 10:15">
-      <p>平面偵測區分IOS與Android</p>
-      <p>IOS：目前使用quciklook</p>
-      <p>Android：目前使用three.js hit-test範例改寫</p>
-    </div>
-  </div>
 
   <script src="js\main.js"></script>
 </body>
