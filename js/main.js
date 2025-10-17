@@ -1,27 +1,42 @@
- const btn_1 = document.getElementById("btn_1")
-    btn_1.addEventListener("click", () => {toggleDisplayById("content_1") });
+// 大按鈕展開中按鈕
+document.querySelectorAll(".big-btn").forEach(bigBtn => {
+  bigBtn.addEventListener("click", () => {
+    const project = bigBtn.parentElement;
+    const midBtns = project.querySelector(".mid-btns");
 
-     // 切換 dom 顯示
-    function toggleDisplayById(id, state = "block") {
-      const element = document.getElementById(id);
-      if (!element) {
-        console.warn(`找不到 id 為 "${id}" 的元素`);
-        return;
-      }
+    // 收合其他
+    document.querySelectorAll(".mid-btns").forEach(mb => {
+      if (mb !== midBtns) mb.classList.remove("show");
+    });
 
-      // 取得當前顯示狀態（計算後樣式）
-      const currentDisplay = window.getComputedStyle(element).display;
+    midBtns.classList.toggle("show");
+    document.getElementById("content-title").textContent = project.getAttribute("data-title");
+  });
+});
 
-      if (currentDisplay === "none") {
-        // 顯示
-        element.style.display = state;
-      } else {
-        // 隱藏
-        element.style.display = "none";
-      }
-    }
+// 中按鈕展開小按鈕
+document.querySelectorAll(".mid-btn").forEach(midBtn => {
+  midBtn.addEventListener("click", () => {
+    const nextSmallBtns = midBtn.nextElementSibling;
 
-
-    // document.getElementById("openWin").addEventListener("click", () => {
-    //   window.open("https://example.com", "_blank", "width=600,height=400");
+    // 收合同層其他
+    // midBtn.parentElement.querySelectorAll(".small-btns").forEach(sb => {
+    //   if (sb !== nextSmallBtns) sb.classList.remove("show");
     // });
+
+    nextSmallBtns.classList.toggle("show");
+  });
+});
+
+// 小按鈕顯示內容
+document.querySelectorAll(".small-btn").forEach(smallBtn => {
+  smallBtn.addEventListener("click", () => {
+    const targetId = smallBtn.getAttribute("data-target");
+    const contentBlock = document.getElementById(targetId);
+
+    if (contentBlock) {
+      document.getElementById("time").textContent = contentBlock.getAttribute("data-time");
+      document.getElementById("content-text").innerHTML = contentBlock.innerHTML;
+    }
+  });
+});
