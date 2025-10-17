@@ -1,0 +1,42 @@
+1.確認token 的計算方式與計費( 文字、圖片... 在Azure 裡的算法)
+https://azure.microsoft.com/zh-tw/pricing/calculator/(定價機算機)
+https://learn.microsoft.com/zh-tw/azure/cost-management-billing/costs/pricing-calculator(使用 Azure 定價計算機來預估成本)
+https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest(opan ai 模型)
+
+
+
+
+2.回答時可以出現的內容 ( 除文字外，還有沒有其他的，比如圖片或影片)
+
+可以
+
+
+
+3.文字的簡中/繁中等語系強制定義(避免跑出混在一起)
+
+
+
+
+
+4.語音可以考慮，試試 Voice Clone，採用愛孟奇的音檔來訓練，看需要什麼條件的音檔
+https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/custom-neural-voice
+https://speech.microsoft.com/portal/515313ba48984236874c5bdd25f58bcf/customvoice/overview(嘗試在 Azure AI Foundry 中 自訂語音)
+
+https://ai.azure.com/explore/models/aiservices/Azure-AI-Speech/version/1/registry/azureml-cogsvc/tryout?NewUX=true&Trigger=Banner&tid=19beb30e-217d-483e-9f9f-297b22aa5bd2#personalvoice(製作)
+https://www.youtube.com/watch?v=pbLGTBJwPf4(官方簡介)
+
+
+
+5.有沒有辦法做RAG ? ( 只在限定文件或上傳的內容範圍內)
+
+https://learn.microsoft.com/zh-tw/azure/search/tutorial-rag-build-solution?context=%2Fazure%2Fai-foundry%2Fcontext%2Fcontext(如何使用 Azure AI 搜尋服務組建 RAG 解決方案)
+
+https://learn.microsoft.com/zh-tw/training/modules/build-copilot-ai-studio/2-ground-language-model(了解 RAG)
+
+
+
+6.掃Cam 時，在畫面上要採用的檢測範圍需不需要定義，或是，全畫面檢測時，則可能設計，掃完猴子再跳出來互動
+
+
+ 7、Viseme 嘴型 
+https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/how-to-speech-synthesis-viseme?tabs=visemeid&pivots=programming-language-csharp
