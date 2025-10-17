@@ -6,7 +6,7 @@ body {
 }
 
 a {
-    color: #e6edf3;
+    color: #328ad8;
 }
 
 .subtitle {
@@ -17,11 +17,13 @@ a {
 }
 
 .sorucelink {
+    display: inline;
     margin-top: 100px;
-    font-size: 1.5em;
+    padding: 5px 30px;
+    font-size: 1.2em;
     text-align: center;
     background-color: #ffae00;
-    border-radius: 20px;
+    border-radius: 4px;
     color: #000;
 }
 
