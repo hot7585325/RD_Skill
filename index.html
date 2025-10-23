@@ -16,7 +16,6 @@
       <div class="project" data-title="Azure 與 Unity 製作的AI Agent">
         <div class="big-btn">Azure AI Agent</div>
         <div class="mid-btns">
-
           <div class="mid-btn">Azure問題</div>
           <div class="small-btns">
             <div class="small-btn" data-target="content-a3">Azure的計費機制</div>
@@ -53,24 +52,39 @@
           </div>
         </div>
       </div>
+
+      <div class="project" data-title="新技術分享">
+        <div class="big-btn">技術分享</div>
+        <div class="mid-btns">
+          <div class="mid-btn">3D</div>
+          <div class="small-btns">
+            <div class="small-btn" data-target="content-c1">混元世界模型开源</div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- 右側內容區 -->
-    <div class="content">
-      <div class="title">
-        <h1 id="content-title">請選擇專案</h1>
-      </div>
-      <div class="content-body">
-        <div class="time" id="time">請選擇技術</div>
-        <div id="content-text">
-          <p>這裡會顯示技術內容...</p>
-        </div>
+ 
+
+  <!-- 右側內容區 -->
+  <div class="content">
+    <div class="title">
+      <h1 id="content-title">請選擇專案</h1>
+    </div>
+    <div class="content-body">
+      <div class="time" id="time">請選擇技術</div>
+      <div id="content-text">
+        <p>這裡會顯示技術內容...</p>
       </div>
     </div>
   </div>
+ </div>
 
   <!-- 主要內容區 -->
   <div id="hidden-contents" style="display:none;">
+
+    <!-- A1 -->
     <div id="content-a1" data-time="2025-10-17">
       <h3 class="subtitle">概述</h3>
       <p class="littletitle">建構流程</p>
@@ -88,6 +102,8 @@
         <li> Custom Vision</li>
       </ul>
     </div>
+
+    <!-- A2 -->
     <div id="content-a2" data-time="2025-10-17">
       <h3 class="subtitle">Unity架構</h3>
       <p class="littletitle">Manager類別</p>
@@ -100,40 +116,78 @@
     <!-- Azure的計費機制 -->
     <div id="content-a3" data-time="2025-10-17">
       <h3 class="subtitle">Azure的計費機制</h3>
+
       <p>在 Azure OpenAI Service 中，token 是依照輸入與輸出的文字量計算，不同模型與媒體類型（文字、圖片、語音）計費方式不一：</p>
-      <p class="littletitle">文字模型（如 GPT-4、GPT-4-turbo、GPT-3.5</p>
+      <p class="middletitle">文字模型</p><br>
+
+      <p class="littletitle">Azure OpenAI 資源的計費主要基於 token 的使用量。以下是計費的基本方式：</p>
       <ul>
-        <li>分為 Prompt tokens（輸入） 與 Completion tokens（輸出）。</li>
-        <li>費用依據模型而異（例如 GPT-4-turbo 約 $0.01/1K tokens 輸入，$0.03/1K tokens 輸出）。</li>
+        <li>Token 計算：Azure OpenAI 模型會將文本分解為 token 進行處理。每個 token 大約相當於四個字符。計費是基於每 1,000 個 token 的使用量。</li>
+        <li>輸入和輸出 Token：您需要為發送的輸入 token 和接收到的輸出 token 支付費用。例如，如果您發送 1,000 個 token 的請求並接收到 1,000 個 token 的回應，則總共計費 2,000
+          個 token。</li>
+        <li>不同模型的費率：不同的模型和部署類型會有不同的費率。具體的費率可以在 Azure OpenAI 定價頁面 上找到。</li>
       </ul>
 
-      <p class="littletitle">圖片生成（DALL·E）</p>
+      <p class="middletitle">圖片生成（DALL·E）</p><br>
+      <p class="littletitle"> 在 Azure OpenAI 資源中，圖像處理的計費方式主要基於每千個 token 的使用量。以下是一些關鍵點：</p>
       <ul>
-        <li>按「生成張數」與「解析度」計費，不以 token 計算</li>
-        <li>256×256、512×512、1024×1024 各有不同費率（約 $0.016~$0.08 / 張）</li>
+        <li>圖像 token：圖像處理會將圖像分解為 token 進行計費。這些 token 的數量取決於圖像的細節和尺寸。</li>
+        <li>額外功能：例如，光學字符識別（OCR）和物體定位等增強功能會產生額外的費用。</li>
       </ul>
 
 
-      <p class="littletitle">語音 / 語音轉文字（Speech to Text / TTS）</p>
+      <p class="middletitle">語音 / 語音轉文字（Speech to Text / TTS）</p>
+      <p>Azure 現支援兩類主要語音型態：語音轉文字（Speech-to-Text, STT）及文字轉語音（Text-to-Speech, TTS）。主要依音訊長度（秒/小時）或每百萬字元計價。</p>
+      <p class="littletitle">語音轉文字（STT）</p>
       <ul>
-        <li>依「秒數」或「文字字數」計價，不計 token</li>
-        <li>Speech to Text：約 $1 / 小時音訊。</li>
-        <li>Text to Speech：約 $16 / 百萬字元（視語音品質不同）</li>
+        <li>標準即時轉錄：$1.00/小時（即時）；$0.369/小時（快速）；$0.181/小時（批次）</li>
+        <li>自訂模型：$1.20/小時（即時）；$0.225/小時（批次</li>
+      </ul>
+      <p class="littletitle">文字轉語音（TTS）</p>
+      <ul>
+        <li>神經語音合成（Neural TTS）：$15/百萬字元（標準）；$30/百萬字元（HD）；自訂語音 $24/百萬字元</li>
+        <li>- 語音服務即時模式按秒數/小時計費，支援多語、多發音人。最新 GPT 4o（即時語音對話）模型的價格以「音訊 Token」核算，最新型態亦支持按用量計費。</li>
       </ul>
 
+      <h3 class="subtitle">實際計費</h3>
+      <P> 目前在此專案中，有使用Azure Open AI、Speech To Text、Text To Speech、Custom Vision等資源</P>
+      <p>目前使用語言模型為GPT-4-Turbo，參照地點後的表格</p>
+
+      <p class="middletitle">驗證計費公式</p>
+      <ul>
+        <li> 找到 Billable 數字（實際計費單位數量）。</li>
+        <li> 對照 Rate（官方定價，依 1K tokens、每分鐘、每字元或每張圖片）。</li>
+        <li> 相乘後應該等於 Value（實際帳單金額）。</li>
+      </ul>
+
+
+
+      <p class="middletitle">2025/9月帳單</p>
       <img src="src\bill.png" style="width: 100%;">
 
       <h3 class="sorucelink">相關連結</h3>
       <ul>
 
-        <li> <a href="https://azure.microsoft.com/zh-tw/pricing/details/cognitive-services/openai-service/">Azure OpenAI
-            服務定價</a>
+        <li> <a href="https://azure.microsoft.com/zh-tw/pricing/details/cognitive-services/speech-services/">Azure
+            AI語音定價</a>
+        </li>
+        <li> <a
+            href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/openai-speech?tabs=macos&pivots=programming-language-csharp">Azure
+            OpenAI 語音轉換語音聊天</a>
         </li>
         <li> <a href="https://learn.microsoft.com/zh-tw/azure/api-management/azure-openai-token-limit-policy">限制 Azure
             OpenAI API 權杖使用量</a>
         </li>
       </ul>
     </div>
+
+    我有幾個疑問
+    Q1、目前這個專案有使用Azure Open AI、Speech To Text、Text To Speech、Custom Vision等資源(CV)，我想知道CV計算方式，上述的功能 是怎麼計算的，感覺很模糊
+    Q2、我講述我的理解你看是否正確，計費方式主要區分三種 文字 圖片 語音，但其實主要是看你使用的語言模型，某些語言模型會支援圖片，有些不支援，每個模型的算法不同
+    Q3、目前我使用的是GPT-4-Turbo模型 我沒辦法確定是否自帶tts stt等功能 ，如果不帶tts stt的功能 那算法如何?
+
+
+
 
     <!-- 回答時除文字外，是否可以呈現圖片或影片等其他內容 -->
     <div id="content-a4" data-time="2025-10-17">
@@ -240,10 +294,9 @@
       <h3 class="sorucelink">相關連結</h3>
       <ul>
         <li>
-          <a href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/custom-neural-voice">什麼是自定義語音？</a>
-        </li>
-        <li> <a href="https://speech.microsoft.com/portal/515313ba48984236874c5bdd25f58bcf/customvoice/overview">嘗試在
-            Azure AI Foundry中自訂語音</a>
+          <a
+            href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/how-to-speech-synthesis-viseme?tabs=visemeid&pivots=programming-language-csharp">使用
+            viseme 取得臉部位置</a>
         </li>
       </ul>
       <br>
@@ -270,6 +323,28 @@
       <p>iOS Safari 因為不完全支援 WebXR</p>
 
     </div>
+
+
+    <!-- 以下是C -->
+    <div id="content-c1" data-time="2025-10-23">
+      <h3 class="subtitle">混元世界模型开源</h3>
+      <p class="littletitle">功能簡介</p>
+      <p>一個統一的前饋式 3D 重建模型，支援多模態先驗輸入，實現點雲、深度、相機位姿、表面法線和新視角合成等多任務 3D 幾何預測</p>
+
+
+      <h3 class="sorucelink">相關連結</h3>
+      <ul>
+        <li>
+          <a href="https://3d-models.hunyuan.tencent.com/world/">混元世界模型開源</a>
+        </li>
+      </ul>
+
+
+    </div>
+
+
+
+
   </div>
 
   <script src="js\main.js"></script>

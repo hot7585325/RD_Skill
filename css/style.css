@@ -27,6 +27,16 @@ a {
     color: #000;
 }
 
+.middletitle {
+    display: inline-block;
+    font-size: 1.2em;
+    text-align: start;
+    padding: 5px 30px;
+    background-color: #fdad00;
+    border-radius: 5px;
+    color: #000;
+}
+
 .littletitle {
     display: inline;
     font-size: 1em;
