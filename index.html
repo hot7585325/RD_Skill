@@ -65,52 +65,76 @@
 
     </div>
 
- 
 
-  <!-- 右側內容區 -->
-  <div class="content">
-    <div class="title">
-      <h1 id="content-title">請選擇專案</h1>
-    </div>
-    <div class="content-body">
-      <div class="time" id="time">請選擇技術</div>
-      <div id="content-text">
-        <p>這裡會顯示技術內容...</p>
+
+    <!-- 右側內容區 -->
+    <div class="content">
+      <div class="title">
+        <h1 id="content-title">請選擇專案</h1>
+      </div>
+      <div class="content-body">
+        <div class="time" id="time">請選擇技術</div>
+        <div id="content-text">
+          <p>這裡會顯示技術內容...</p>
+        </div>
       </div>
     </div>
   </div>
- </div>
 
   <!-- 主要內容區 -->
   <div id="hidden-contents" style="display:none;">
 
     <!-- A1 -->
-    <div id="content-a1" data-time="2025-10-17">
+    <div id="content-a1" data-time="2025-10-27">
       <h3 class="subtitle">概述</h3>
-      <p class="littletitle">建構流程</p>
-      <ol>
-        <li>Azure創建的資源</li>
-        <li>獲取金鑰</li>
-        <li>使用Unity 透過REST ful 向Azure發送相關請求</li>
-      </ol>
+      <p class="middletitle">Azure創建的資源</p>
+      <p>Azure 裡面有很多功能服務都很相近，這邊以Service將功能區分</p>
 
-      <p class="littletitle">Azure創建的資源</p>
+      <p class="littletitle">Azure Speech Service</p>
       <ul>
-        <li> Open AI LLM</li>
-        <li> Text To Speech</li>
-        <li> Speech To Text</li>
-        <li> Custom Vision</li>
+        <li>Speech to Text (STT) – 語音轉文字</li>
+        <li> Text to Speech (TTS) – 文字轉語音</li>
+        <li>Viseme 嘴型事件 – 提供嘴型同步資訊</li>
+        <li>Custom Neural Voice – 聲音克隆（需申請核准）</li>
       </ul>
+      <p class="littletitle">Azure OpenAI Service</p>
+      <ul>
+        <li>GPT‑4o / GPT‑4 Turbo / GPT‑4o-mini – 大型語言模型 (LLM)</li>
+        <li>DALL·E – 文字轉圖片 (Image Generation)</li>
+        <li> Embeddings – 向量化，用於搜尋 / RAG</li>
+      </ul>
+
+      <p class="littletitle">Azure AI Search</p>
+      <ul>
+        <li>文件索引與檢索</li>
+        <li>向量搜尋 (Vector Search)</li>
+        <li>storage account</li>
+      </ul>
+
+      <p class="littletitle">Azure Custom Vision</p>
+      <ul>
+        <li>影像分類 (Classification)</li>
+        <li>物件偵測 (Object Detection)</li>
+        <li>訓練 (Training) – 依小時計費</li>
+        <li>推論 (Prediction) – 依圖片數計費</li>
+      </ul>
+
+      <p class="littletitle">Azure AI Foundry</p>
+      <ul>
+        <li>模型目錄 (Model Catalog) – 整合 OpenAI、Hugging Face、Meta 等模型</li>
+        <li>Responses API – 支援文字 + JSON + 工具調用</li>
+        <li>Agentic Platform – 建立 AI Agent，可呼叫工具 / API</li>
+        <li>Observability & Governance – 監控、治理、合規</li>
+        <li>Generative Search (RAG) – 低程式碼化的 RAG 工作流程</li>
+        <li>Sora (影片生成, Preview) – 文字轉影片</li>
+      </ul>
+
     </div>
 
     <!-- A2 -->
     <div id="content-a2" data-time="2025-10-17">
-      <h3 class="subtitle">Unity架構</h3>
-      <p class="littletitle">Manager類別</p>
-      <ol>
-        <li>Mainmanger ：負責切換場警</li>
-        <li>EventBus：提供事件訂閱發送</li>
-      </ol>
+      <h3 class="subtitle">目前狀態</h3>
+      <p class="middletitle">已完成功能：</p>
     </div>
 
     <!-- Azure的計費機制 -->
@@ -181,18 +205,21 @@
       </ul>
     </div>
 
-    我有幾個疑問
-    Q1、目前這個專案有使用Azure Open AI、Speech To Text、Text To Speech、Custom Vision等資源(CV)，我想知道CV計算方式，上述的功能 是怎麼計算的，感覺很模糊
-    Q2、我講述我的理解你看是否正確，計費方式主要區分三種 文字 圖片 語音，但其實主要是看你使用的語言模型，某些語言模型會支援圖片，有些不支援，每個模型的算法不同
-    Q3、目前我使用的是GPT-4-Turbo模型 我沒辦法確定是否自帶tts stt等功能 ，如果不帶tts stt的功能 那算法如何?
-
-
-
-
     <!-- 回答時除文字外，是否可以呈現圖片或影片等其他內容 -->
     <div id="content-a4" data-time="2025-10-17">
       <h3 class="subtitle">回答時除文字外，是否可以呈現圖片或影片等其他內容</h3>
-      <P>C回答的內容除了文字外，可以是圖片或影片</P>
+      <ul>
+        <li>圖片 → 用 LLM 產生 prompt，再丟給 DALL·E。</li>
+        <li>影片 → 用 LLM 產生 prompt，再丟給 Sora（Azure AI Foundry 提供，Preview）。</li>
+        <li>整合方式 → 建議讓 LLM 回覆 JSON，您的程式解析後決定要呼叫哪個生成 API。</li>
+      </ul>
+
+      <a class="middletitle"
+        href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1">圖片生成-DALL·E</a>
+      <a class="middletitle"
+        href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/concepts/video-generation?tabs=python-entra">影片生成-Sora</a>
+
+
     </div>
 
     <!--  強制指定語言以避免混用-->
@@ -249,6 +276,15 @@
       <p class="littletitle">RAG 技術架構與 Azure 實作配置</p>
       <p>RAG（Retrieval-Augmented Generation, 擷取增強生成）是現代 AI 中文件與知識庫對話的主流架構。透過檢索引擎（如 Azure AI
         Search）先將外部特定文件分塊、索引、向量化，再將相關段落作為 prompt input 提供給 LLM，在回答時僅考慮限定資料源，保證安全性、專業性與權限隔離</p>
+
+      <p class="littletitle">主要步驟</p>
+      <ol>
+        <li>創建storage account 資源</li>
+        <li>創建storage account 資源</li>
+        <li>創建Ai Search Service 資源</li>
+      </ol>
+
+
       <p class="littletitle">Azure RAG 標準實作過程</p>
       <ol>
         <li>文件上傳：支援 txt、md、html、docx、pptx、pdf 等主流格式，上傳至 Azure AI Foundry/AI Search 或 Blob Storage。</li>
