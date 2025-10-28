@@ -199,8 +199,7 @@
             href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/openai-speech?tabs=macos&pivots=programming-language-csharp">Azure
             OpenAI 語音轉換語音聊天</a>
         </li>
-        <li> <a href="https://learn.microsoft.com/zh-tw/azure/api-management/azure-openai-token-limit-policy">限制 Azure
-            OpenAI API 權杖使用量</a>
+        <li> <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview#tokens">Tokens 代幣</a>
         </li>
       </ul>
     </div>
@@ -273,45 +272,39 @@
     <!-- RAG -->
     <div id="content-a7" data-time="2025-10-17">
       <h3 class="subtitle">實作 RAG</h3>
-      <p class="littletitle">RAG 技術架構與 Azure 實作配置</p>
-      <p>RAG（Retrieval-Augmented Generation, 擷取增強生成）是現代 AI 中文件與知識庫對話的主流架構。透過檢索引擎（如 Azure AI
-        Search）先將外部特定文件分塊、索引、向量化，再將相關段落作為 prompt input 提供給 LLM，在回答時僅考慮限定資料源，保證安全性、專業性與權限隔離</p>
+      <p class="middletitle">實踐方法：</p>
+      <P>以下為微軟Foundry 代理程式的回應</P>
+      <P>對於您目前的架構，集成檢索系統和雲端服務接入是最適合的選擇。這兩種方式能夠輕鬆地與您的 RESTful API 串接並為 LLM 提供所需的上下文。</P>
+      <p class="littletitle">使用嵌入模型：</p>
+      <p>如果您的應用需要從大量文本中檢索相關信息，並且能夠在 Unity 中管理嵌入的生成與檢索，那麼這種方式可能適合您。您可以將嵌入結果儲存到資料庫，然後在需要時快速檢索。</p>
 
-      <p class="littletitle">主要步驟</p>
+      <p class="littletitle">集成檢索系統：</p>
+      <p> 這是最推薦的方式，因為它能夠與現有的 RESTful API 進行無縫對接。您可以利用 Azure 的 SQL Database 或 Cosmos DB
+        等服務來存儲可檢索的數據，然後在Unity中發送請求以獲取相關信息，將結果傳遞給 LLM 以生成上下文。</p>
+
+      <p class="littletitle">專用模型：</p>
+      <p>如果您想要簡化過程並且希望使用一個已有的解決方案，這種方式可以快速實現 RAG 功能。然而，您需要確保該模型能夠毫不困難地與 Unity 和 API 串接。</p>
+
+      <p class="littletitle">雲端服務接入：</p>
+      <p>如果您希望集中化管理並利用 Azure 的可擴展性，此方式會非常合適。利用 Azure 的 API，您可以輕鬆整合 RAG 功能以支援您的應用。</p>
+
+
+
+      <p class="middletitle">主要步驟</p>
+      <p>以下為實作的內容筆記</p>
       <ol>
-        <li>創建storage account 資源</li>
-        <li>創建storage account 資源</li>
+        <li>創建storage account 帳號</li>
+        <li>於storage account 建立儲存體資源<img src="src\bolb_source.png" style="width: 100%;"></li>
         <li>創建Ai Search Service 資源</li>
       </ol>
-
-
-      <p class="littletitle">Azure RAG 標準實作過程</p>
-      <ol>
-        <li>文件上傳：支援 txt、md、html、docx、pptx、pdf 等主流格式，上傳至 Azure AI Foundry/AI Search 或 Blob Storage。</li>
-        <li>分塊/嵌入：採用 phrase-based（語意型）或 fixed-size（按 token 數）分段，Azure 支援 Markdown 教材自動區塊劃分。</li>
-        <li>向量化索引：以內嵌（Embedding）模型（推薦 text-embedding-ada-002、gpt-v 等）將內容轉向量儲存於 Azure Search 索引。</li>
-        <li>查詢限制：查詢/問答僅限制於該資料索引，不會超出特定文件集（支援 REST API 篩選/分組）。</li>
-        <li>權限篩選：搭配 Azure AD/Entra 制定細緻權限（如文件層級存取），每次查詢都經存取條件過濾。</li>
-        <li>Unity/前端整合：API 回應可精確揭露來源段落、頁碼、引用原文、甚至附圖及原始檔下載連結。</li>
-        <li>實作可使用 LangChain/LlamaIndex/Semantic Kernel 開源方案串接</li>
-      </ol>
-      <p class="littletitle">RAG 文件範圍控制與參數</p>
-      <ul>
-        <li>可上傳資料</li>
-        <li>可設搜尋範圍（資料夾、Blob Container、文件屬性欄位）</li>
-        <li>支援向量搜尋、語意搜尋、混合搜尋</li>
-        <li>支援文件層級存取權（Entra 群組）</li>
-        <li>查詢 API 支援欄位濾選（filter 參數</li>
-      </ul>
 
 
       <h3 class="sorucelink">相關連結</h3>
       <ul>
         <li>
-          <a href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/custom-neural-voice">什麼是自定義語音？</a>
+          <a href="https://solwen.ai/posts/what-is-rag">什麼是 RAG？初學者也看得懂的檢索增強生成（RAG）基礎指南</a>
         </li>
-        <li> <a href="https://speech.microsoft.com/portal/515313ba48984236874c5bdd25f58bcf/customvoice/overview">嘗試在
-            Azure AI Foundry中自訂語音</a>
+        <li> <a href="https://mapify.so/share-link/qHBmbvzIhF">RAG心智圖</a>
         </li>
       </ul>
       <br>
