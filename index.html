@@ -9,27 +9,32 @@
 
 <body>
   <div class="container">
-    <!-- 左側欄位 -->
 
+    <!-- #region 左側欄位 -->
     <div class="sidebar">
 
-      <div class="project" data-title="Azure 與 Unity 製作的AI Agent">
-        <div class="big-btn">Azure AI Agent</div>
+      <div class="project" data-title="Azure AI Assistant">
+        <div class="big-btn">Azure AI Assistant</div>
         <div class="mid-btns">
+
+          <div class="mid-btn">專案理解</div>
+          <div class="small-btns">
+            <div class="small-btn" data-target="content-a1">概述</div>
+          </div>
+
           <div class="mid-btn">Azure問題</div>
           <div class="small-btns">
             <div class="small-btn" data-target="content-a3">Azure的計費機制</div>
             <div class="small-btn" data-target="content-a4">LLM回答內容</div>
             <div class="small-btn" data-target="content-a5">語系強制定義</div>
             <div class="small-btn" data-target="content-a6">自訂語音</div>
-            <div class="small-btn" data-target="content-a7">RAG實作</div>
-            <div class="small-btn" data-target="content-a8">Viseme 嘴型 </div>
+            <div class="small-btn" data-target="content-a7">Viseme 嘴型 </div>
           </div>
 
-          <div class="mid-btn">專案理解</div>
+          <div class="mid-btn">RAG實作</div>
           <div class="small-btns">
-            <div class="small-btn" data-target="content-a1">概述</div>
-            <div class="small-btn" data-target="content-a2">限制</div>
+            <div class="small-btn" data-target="content-rag-1">簡介</div>
+            <div class="small-btn" data-target="content-rag-2">多模態</div>
           </div>
 
         </div>
@@ -62,12 +67,10 @@
           </div>
         </div>
       </div>
-
     </div>
+    <!-- #endregion  -->
 
-
-
-    <!-- 右側內容區 -->
+    <!-- #region 右側內容區 -->
     <div class="content">
       <div class="title">
         <h1 id="content-title">請選擇專案</h1>
@@ -79,12 +82,14 @@
         </div>
       </div>
     </div>
+    <!-- #endregion  -->
   </div>
+
 
   <!-- 主要內容區 -->
   <div id="hidden-contents" style="display:none;">
 
-    <!-- A1 -->
+    <!-- #region Azure專案概述 -->
     <div id="content-a1" data-time="2025-10-27">
       <h3 class="subtitle">概述</h3>
       <p class="middletitle">Azure創建的資源</p>
@@ -130,21 +135,14 @@
       </ul>
 
     </div>
+    <!-- #endregion  -->
 
-    <!-- A2 -->
-    <div id="content-a2" data-time="2025-10-17">
-      <h3 class="subtitle">目前狀態</h3>
-      <p class="middletitle">已完成功能：</p>
-    </div>
-
-    <!-- Azure的計費機制 -->
+    <!-- #region Azure的計費機制 -->
     <div id="content-a3" data-time="2025-10-17">
       <h3 class="subtitle">Azure的計費機制</h3>
 
       <p>在 Azure OpenAI Service 中，token 是依照輸入與輸出的文字量計算，不同模型與媒體類型（文字、圖片、語音）計費方式不一：</p>
       <p class="middletitle">文字模型</p><br>
-
-      <p class="littletitle">Azure OpenAI 資源的計費主要基於 token 的使用量。以下是計費的基本方式：</p>
       <ul>
         <li>Token 計算：Azure OpenAI 模型會將文本分解為 token 進行處理。每個 token 大約相當於四個字符。計費是基於每 1,000 個 token 的使用量。</li>
         <li>輸入和輸出 Token：您需要為發送的輸入 token 和接收到的輸出 token 支付費用。例如，如果您發送 1,000 個 token 的請求並接收到 1,000 個 token 的回應，則總共計費 2,000
@@ -153,7 +151,8 @@
       </ul>
 
       <p class="middletitle">圖片生成（DALL·E）</p><br>
-      <p class="littletitle"> 在 Azure OpenAI 資源中，圖像處理的計費方式主要基於每千個 token 的使用量。以下是一些關鍵點：</p>
+      <P>Azure OpenAI 的影像處理功能，結合 GPT-4o、GPT-4o-mini 和 GPT-4 Turbo with Vision
+        模型，使用影像標記化來確定影像輸入所消耗的標記總數。消耗的標記數量是基於兩個主要因素計算：影像細節等級（低或高）和影像尺寸。標記成本的計算方法如下：</P>
       <ul>
         <li>圖像 token：圖像處理會將圖像分解為 token 進行計費。這些 token 的數量取決於圖像的細節和尺寸。</li>
         <li>額外功能：例如，光學字符識別（OCR）和物體定位等增強功能會產生額外的費用。</li>
@@ -187,24 +186,30 @@
 
 
       <p class="middletitle">2025/9月帳單</p>
-      <img src="src\bill.png" style="width: 100%;">
+      <img src="src\bill.png" class="rd-image">
 
       <h3 class="sorucelink">相關連結</h3>
       <ul>
 
+        <li> <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview#tokens">Tokens 代幣</a>
+        </li>
+        <li> <a href=" https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/">Azure
+            OpenAI 定價</a>
+        </li>
         <li> <a href="https://azure.microsoft.com/zh-tw/pricing/details/cognitive-services/speech-services/">Azure
             AI語音定價</a>
         </li>
-        <li> <a
-            href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/openai-speech?tabs=macos&pivots=programming-language-csharp">Azure
-            OpenAI 語音轉換語音聊天</a>
+        <li> <a href="https://azure.microsoft.com/zh-tw/pricing/details/search/">Azure AI 搜尋定價(RAG)</a>
         </li>
-        <li> <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview#tokens">Tokens 代幣</a>
-        </li>
+
+
+
+
       </ul>
     </div>
+    <!-- #endregion  -->
 
-    <!-- 回答時除文字外，是否可以呈現圖片或影片等其他內容 -->
+    <!-- #region 回答時除文字外，是否可以呈現圖片或影片等其他內容 -->
     <div id="content-a4" data-time="2025-10-17">
       <h3 class="subtitle">回答時除文字外，是否可以呈現圖片或影片等其他內容</h3>
       <ul>
@@ -217,11 +222,14 @@
         href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1">圖片生成-DALL·E</a>
       <a class="middletitle"
         href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/concepts/video-generation?tabs=python-entra">影片生成-Sora</a>
-
+      <a class="middletitle"
+        href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1">如何使用 Azure
+        OpenAI 影像生成模型</a>
 
     </div>
+    <!-- #endregion  -->
 
-    <!--  強制指定語言以避免混用-->
+    <!--  #region 強制指定語言以避免混用-->
     <div id="content-a5" data-time="2025-10-17">
       <h3 class="subtitle">強制指定語言以避免混用</h3>
 
@@ -246,8 +254,9 @@
 
 
     </div>
+    <!-- #endregion  -->
 
-    <!-- 語音克隆基本技術 -->
+    <!-- #region 語音克隆基本技術 -->
     <div id="content-a6" data-time="2025-10-17">
       <h3 class="subtitle">Azure 語音克隆基本技術</h3>
       <p>Azure Cognitive Services 的 Custom Neural Voice（自訂神經語音）即提供高階語音克隆能力，允許根據多個語音樣本訓練個人化 TTS
@@ -268,57 +277,17 @@
       <br>
 
     </div>
+    <!-- #endregion  -->
 
-    <!-- RAG -->
+    <!-- #region viseme -->
     <div id="content-a7" data-time="2025-10-17">
-      <h3 class="subtitle">實作 RAG</h3>
-      <p class="middletitle">實踐方法：</p>
-      <P>以下為微軟Foundry 代理程式的回應</P>
-      <P>對於您目前的架構，集成檢索系統和雲端服務接入是最適合的選擇。這兩種方式能夠輕鬆地與您的 RESTful API 串接並為 LLM 提供所需的上下文。</P>
-      <p class="littletitle">使用嵌入模型：</p>
-      <p>如果您的應用需要從大量文本中檢索相關信息，並且能夠在 Unity 中管理嵌入的生成與檢索，那麼這種方式可能適合您。您可以將嵌入結果儲存到資料庫，然後在需要時快速檢索。</p>
-
-      <p class="littletitle">集成檢索系統：</p>
-      <p> 這是最推薦的方式，因為它能夠與現有的 RESTful API 進行無縫對接。您可以利用 Azure 的 SQL Database 或 Cosmos DB
-        等服務來存儲可檢索的數據，然後在Unity中發送請求以獲取相關信息，將結果傳遞給 LLM 以生成上下文。</p>
-
-      <p class="littletitle">專用模型：</p>
-      <p>如果您想要簡化過程並且希望使用一個已有的解決方案，這種方式可以快速實現 RAG 功能。然而，您需要確保該模型能夠毫不困難地與 Unity 和 API 串接。</p>
-
-      <p class="littletitle">雲端服務接入：</p>
-      <p>如果您希望集中化管理並利用 Azure 的可擴展性，此方式會非常合適。利用 Azure 的 API，您可以輕鬆整合 RAG 功能以支援您的應用。</p>
-
-
-
-      <p class="middletitle">主要步驟</p>
-      <p>以下為實作的內容筆記</p>
-      <ol>
-        <li>創建storage account 帳號</li>
-        <li>於storage account 建立儲存體資源<img src="src\bolb_source.png" style="width: 100%;"></li>
-        <li>創建Ai Search Service 資源</li>
-      </ol>
-
-
-      <h3 class="sorucelink">相關連結</h3>
-      <ul>
-        <li>
-          <a href="https://solwen.ai/posts/what-is-rag">什麼是 RAG？初學者也看得懂的檢索增強生成（RAG）基礎指南</a>
-        </li>
-        <li> <a href="https://mapify.so/share-link/qHBmbvzIhF">RAG心智圖</a>
-        </li>
-      </ul>
-      <br>
-    </div>
-
-    <!-- viseme -->
-    <div id="content-a8" data-time="2025-10-17">
       <h3 class="subtitle">角色的嘴型搭配 TTS 呈現</h3>
       <p class="littletitle">RAG 技術架構與 Azure 實作配置</p>
       <p>Azure Speech 與 OpenAI GPT-4o 以上多模模型，皆支援在 TTS 合成語音時回傳對應嘴型動作資訊（viseme 或 blendshape），助力 3D 虛擬角色、AI
         虛擬人或遊戲角色在唇動動畫和語音完全同步。</p>
       <p class="littletitle">Unity 嘴型同步標準流程</p>
 
-      <img src="src\viseme.png" style="width: 100%;">
+      <img src="src\viseme.png" class="rd-image">
 
       <h3 class="sorucelink">相關連結</h3>
       <ul>
@@ -330,9 +299,79 @@
       </ul>
       <br>
     </div>
+    <!-- #endregion  -->
+
+    <!--#region  RAG -->
+    <div id="content-rag-1" data-time="2025-10-29">
+      <h3 class="subtitle">實作 RAG</h3>
+      <p>目前Azure現有的方法</p>
+      <ol>
+        <li>直接透過Azure AI Foundry的playGround /Add your data去製作</li>
+        <li>自己做將資料作拆分索引</li>
+      </ol>
 
 
-    <!-- 以下是B -->
+      <p class="middletitle">主要步驟</p>
+      <p>目前採用第一種方式，以下為實作的內容筆記</p>
+      <ol>
+        <li>創建storage account 帳號</li>
+        <li>於storage account 建立儲存體資源<img src="src\bolb_source.png" class="rd-image"></li>
+        <li>創建Ai Search Service 資源</li>
+        <li>建立角色指派</li>
+      </ol>
+
+
+
+      <h3 class="sorucelink">相關連結</h3>
+      <ul>
+        <li><a href="https://solwen.ai/posts/what-is-rag">什麼是 RAG？初學者也看得懂的檢索增強生成（RAG）基礎指南</a></li>
+        <li> <a href="https://www.youtube.com/watch?v=WWdlme1EAGI&t=524s">RAG工作原理</a></li>
+        <li> <a href="https://mapify.so/share-link/qHBmbvzIhF">RAG心智圖</a></li>
+        <li> <a
+            href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0">什麼是
+            Azure AI 文件智能？</a></li>
+
+        <li> <a href="https://learn.microsoft.com/zh-tw/azure/ai-services/content-understanding/overview">什麼是 Azure AI
+            內容瞭解?</a></li>
+      </ul>
+      <br>
+    </div>
+
+    <div id="content-rag-2" data-time="2025-10-29">
+      <h3 class="subtitle">角色分派</h3>
+      <p class="middletitle">角色?</p>
+      <p>簡單來說給定權限的意思，有點類似Discord的身份</p>
+      <p>可能可以給外部人員適當的權限 讓他們自己更新某個資料?</p>
+      <ol>
+        <li>誰可以做什麼?</li><br>
+        <li>可以是使用者、資源、應用程式</li>
+      </ol>
+
+
+      <p class="middletitle">作用域</p>
+      <p>在 Azure RBAC（角色存取控制）裡，「作用域」指的是角色權限生效的範圍</p>
+      <ol>
+        <li>在哪裡可以執行操作</li><br>
+        <li>用帳戶 (Subscription) 層級</li><br>
+        <li>- 資源群組 (Resource Group) 層級</li><br>
+        <li>單一資源 (Resource) 層級</li><br>
+      </ol>
+      <p>沒有使用角色分派的話，會在RAG設定上造成錯誤</p>
+      <img src="src\無身份錯誤.png" class="rd-image">
+
+      <h3 class="sorucelink">相關連結</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=4v7ffXxOnwU">Azure 基於角色的存取控制</a></li>
+        <li> <a
+            href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/on-your-data-configuration#role-assignments">Azure
+            OpenAI On Your Data 的網路與存取配置</a>
+        </li>
+      </ul>
+      <br>
+    </div>
+    <!-- #endregion  -->
+
+    <!--#region webAr -->
     <div id="content-b1" data-time="2025-10-17">
       <h3 class="subtitle">概述</h3>
       <p class="littletitle">功能簡介</p>
@@ -352,9 +391,9 @@
       <p>iOS Safari 因為不完全支援 WebXR</p>
 
     </div>
+    <!-- #endregion  -->
 
-
-    <!-- 以下是C -->
+    <!-- #region 技術分享 -->
     <div id="content-c1" data-time="2025-10-23">
       <h3 class="subtitle">混元世界模型开源</h3>
       <p class="littletitle">功能簡介</p>
@@ -367,10 +406,8 @@
           <a href="https://3d-models.hunyuan.tencent.com/world/">混元世界模型開源</a>
         </li>
       </ul>
-
-
     </div>
-
+    <!-- #endregion  -->
 
 
 

@@ -12,8 +12,9 @@ a {
 .subtitle {
     font-size: 1.5em;
     text-align: center;
-    background-color: #485b79;
+    background-color: #1d5cbb;
     border-radius: 20px;
+    margin-top: 5em;
 }
 
 .sorucelink {
@@ -28,6 +29,11 @@ a {
 }
 
 .middletitle {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 5em;
+
     display: inline-block;
     font-size: 1.2em;
     text-align: start;
@@ -39,6 +45,7 @@ a {
 
 .littletitle {
     display: inline;
+    margin-top: 5em;
     font-size: 1em;
     text-align: start;
     padding: 5px 30px;
@@ -60,23 +67,26 @@ a {
 }
 
 .big-btn {
-    background: #238636;
-    color: white;
+    background: #f1bc0b;
+    color: rgb(58, 58, 63);
     padding: 15px;
     margin: 5px 0;
     cursor: pointer;
     text-align: center;
     font-weight: bold;
     border-radius: 6px;
+    font-size: large;
     transition: background 0.3s;
 }
 
 .big-btn:hover {
-    background: #2ea043;
+    background: #ff8801;
+    font-size: x-large;
 }
 
 .mid-btn {
     background: #1f6feb;
+    text-align: center;
     color: white;
     padding: 12px;
     margin: 6px 0;
@@ -102,6 +112,7 @@ a {
 
 /* 小按鈕容器，預設收合 */
 .small-btns {
+    text-align: center;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease;
@@ -154,4 +165,27 @@ a {
     right: 20px;
     font-size: 14px;
     color: #8b949e;
+}
+
+.rd-image {
+    width: 95%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-color: #8b949e;
+    border-style: solid;
+}
+
+ol,ul
+{
+    border-radius: 5px;
+    border-color: #00397a;
+    border-style: solid;
+    background-color: #1b1b1bce;
+    padding:  auto  ;
+}
+
+li {
+    margin-top: .6em;
+    font-weight:lighter;
+    color: #ffffff;
 }
