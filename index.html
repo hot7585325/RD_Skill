@@ -34,7 +34,7 @@
           <div class="mid-btn">RAG實作</div>
           <div class="small-btns">
             <div class="small-btn" data-target="content-rag-1">簡介</div>
-            <div class="small-btn" data-target="content-rag-2">多模態</div>
+            <div class="small-btn" data-target="content-rag-2">角色分派</div>
           </div>
 
         </div>
@@ -281,20 +281,31 @@
 
     <!-- #region viseme -->
     <div id="content-a7" data-time="2025-10-17">
-      <h3 class="subtitle">角色的嘴型搭配 TTS 呈現</h3>
-      <p class="littletitle">RAG 技術架構與 Azure 實作配置</p>
+      <h3 class="subtitle">Viseme嘴型</h3>
+      <p class="littletitle">角色的自然嘴型</p>
       <p>Azure Speech 與 OpenAI GPT-4o 以上多模模型，皆支援在 TTS 合成語音時回傳對應嘴型動作資訊（viseme 或 blendshape），助力 3D 虛擬角色、AI
         虛擬人或遊戲角色在唇動動畫和語音完全同步。</p>
-      <p class="littletitle">Unity 嘴型同步標準流程</p>
+      <p class="littletitle">Unity 嘴型同步流程</p>
+      <ol>
+        <li>使用speech.speechSynthesizer獲取viseme</li>
+        <li>在3D軟體設定好blendShape</li>
+        <li>透過viseme.id與Unity Mesh.SetBlendShapeWeight設定變形權重</li>
+      </ol>
 
-      <img src="src\viseme.png" class="rd-image">
+      <p class="littletitle">Viseme資訊</p>
+      <p>viseme.id=傳回嘴型編號</p>
+      <p>viseme.AudioOffset=該嘴型對應的時間</p>
+      <p>viseme.Animation=回傳55個基本blendshape表情</p>
 
+      <p class="littletitle">參考圖</p>
+      <P> 目前使用對應名稱▼</P>
+      <img src="src\VisemeBS.png" class="rd-image">
       <h3 class="sorucelink">相關連結</h3>
       <ul>
         <li>
           <a
-            href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/how-to-speech-synthesis-viseme?tabs=visemeid&pivots=programming-language-csharp">使用
-            viseme 取得臉部位置</a>
+            href="https://learn.microsoft.com/zh-tw/azure/ai-services/speech-service/how-to-speech-synthesis-viseme?tabs=visemeid&pivots=programming-language-csharp#map-phonemes-to-visemes">使用
+            viseme 嘴型制作參考</a>
         </li>
       </ul>
       <br>
@@ -339,32 +350,32 @@
 
     <div id="content-rag-2" data-time="2025-10-29">
       <h3 class="subtitle">角色分派</h3>
-      <p class="middletitle">角色?</p>
-      <p>簡單來說給定權限的意思，有點類似Discord的身份</p>
-      <p>可能可以給外部人員適當的權限 讓他們自己更新某個資料?</p>
-      <ol>
-        <li>誰可以做什麼?</li><br>
-        <li>可以是使用者、資源、應用程式</li>
-      </ol>
-
-
-      <p class="middletitle">作用域</p>
-      <p>在 Azure RBAC（角色存取控制）裡，「作用域」指的是角色權限生效的範圍</p>
-      <ol>
-        <li>在哪裡可以執行操作</li><br>
-        <li>用帳戶 (Subscription) 層級</li><br>
-        <li>- 資源群組 (Resource Group) 層級</li><br>
-        <li>單一資源 (Resource) 層級</li><br>
-      </ol>
-      <p>沒有使用角色分派的話，會在RAG設定上造成錯誤</p>
+      <p>在AI Foundry的playGround 使用Add your Data (RAG)，會有資源的權限問題，資源與資源間需要給定相應權限，詳細設定可以參考<a
+          href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/on-your-data-configuration#role-assignments">Role
+          assignments</a></p>
+      <P>懶人包：賦予"A資源"一個你指定的角色，並把該角色的存取權限指定給"B使用者/資源"</P>
+      <p>下圖是沒有分配角色時，會出現的錯誤</p>
       <img src="src\無身份錯誤.png" class="rd-image">
+      <p>第一點：賦予AI Serach Resource，2個角色(Serach Service Contributor、Searce Index Data Reader)，並把該角色的存取權限都指定給Azure OpenAI Resource</p>
+      <img src="src\無身份錯誤2.png" class="rd-image">
+
+      <p class="middletitle">實際操作</p>
+      <P>在首頁點選資源後，可以在左側欄位看到存取控制(IAM)的選項▼</P>
+      <img src="src\IAM.png" class="rd-image">
+      <P>在上方選項， +新增 > 新增角色指派，會移動到下方頁面，操作上直接點選該欄位，即表示使用該角色</P>
+      <P>每個資源，在新增角色分派時，會顯示全部內建的角色，因為Azure目前不會依照你選擇的資源，去篩選角色，所以雖然介面有很多角色，但實際上只有一部分「對該資源有意義」</P>
+      <img src="src\新增角色分派.png" class="rd-image">
+      <P>而這個角色，可以給誰使用，如果以RAG為例 ，需要選擇受控識別(資源)</P>
+      <img src="src\新增角色分派2.png" class="rd-image">
+      <P>依照錯誤log所示，還會需要開啟 AI Search的受控識別，可以在AI Foundry > "搭配使用"中找到該資源，並點選"識別"，如下圖所示▼</P>
+      <img src="src\開啟serach受控識別.png" class="rd-image">
 
       <h3 class="sorucelink">相關連結</h3>
       <ul>
         <li><a href="https://www.youtube.com/watch?v=4v7ffXxOnwU">Azure 基於角色的存取控制</a></li>
         <li> <a
-            href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/on-your-data-configuration#role-assignments">Azure
-            OpenAI On Your Data 的網路與存取配置</a>
+            href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/on-your-data-configuration#role-assignments">Role
+            assignments</a>
         </li>
       </ul>
       <br>
