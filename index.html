@@ -172,6 +172,14 @@
         <li>- 語音服務即時模式按秒數/小時計費，支援多語、多發音人。最新 GPT 4o（即時語音對話）模型的價格以「音訊 Token」核算，最新型態亦支持按用量計費。</li>
       </ul>
 
+
+      <p class="middletitle">RAG(AI Serach)</p><br>
+      <p>RAG 只要一啟用免費層以外的定價層，就會<a
+          href="https://learn.microsoft.com/en-us/azure/search/search-sku-manage-costs#understand-the-billing-model">固定收費</a>
+      </p>
+      <img src="src\ai serach 每月固定收費.png" class="rd-image">
+
+
       <h3 class="subtitle">實際計費</h3>
       <P> 目前在此專案中，有使用Azure Open AI、Speech To Text、Text To Speech、Custom Vision等資源</P>
       <p>目前使用語言模型為GPT-4-Turbo，參照地點後的表格</p>
@@ -315,29 +323,51 @@
     <!--#region  RAG -->
     <div id="content-rag-1" data-time="2025-10-29">
       <h3 class="subtitle">實作 RAG</h3>
-      <p>目前Azure現有的方法</p>
+
+      <p class="middletitle">RAG實作方法</p>
+      <p>目前Azure現有的方法，目前採用第一種方式</p>
+
       <ol>
-        <li>直接透過Azure AI Foundry的playGround /Add your data去製作</li>
-        <li>自己做將資料作拆分索引</li>
+        <li>
+          <p>直接透過Azure AI Foundry的<a
+              href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/use-your-data-quickstart?tabs=keyless%2Ctypescript-keyless%2Cpython-new&pivots=ai-foundry-portal#add-your-data-using-azure-ai-foundry-portal">playGround
+              /Add your data</a>去製作(不能使用免費層的AI Search Service)</p>
+        </li>
+        <li> <P><a
+            href="https://learn.microsoft.com/zh-tw/azure/search/tutorial-rag-build-solution?context=%2Fazure%2Fai-foundry%2Fcontext%2Fcontext">自己將資料作拆分索引</a>(較繁瑣複雜)</P>
+        </li>
       </ol>
 
 
-      <p class="middletitle">主要步驟</p>
-      <p>目前採用第一種方式，以下為實作的內容筆記</p>
+eca6a7ef-182f-4e97-af82-cf6c79a09df9
+
+
+      <p class="middletitle">RAG製作的基本條件</p>
       <ol>
         <li>創建storage account 帳號</li>
-        <li>於storage account 建立儲存體資源<img src="src\bolb_source.png" class="rd-image"></li>
+        <li>於storage account 建立儲存體資源(圖片1)</li>
         <li>創建Ai Search Service 資源</li>
+        <li>Azure Ai Search Service 中 金鑰 > API 存取控制選擇兩者</li>
         <li>建立角色指派</li>
       </ol>
 
-
+      <p>圖片1▼</p>
+      <img src="src\bolb_source.png" class="rd-image">
 
       <h3 class="sorucelink">相關連結</h3>
       <ul>
         <li><a href="https://solwen.ai/posts/what-is-rag">什麼是 RAG？初學者也看得懂的檢索增強生成（RAG）基礎指南</a></li>
         <li> <a href="https://www.youtube.com/watch?v=WWdlme1EAGI&t=524s">RAG工作原理</a></li>
         <li> <a href="https://mapify.so/share-link/qHBmbvzIhF">RAG心智圖</a></li>
+        <li><a href="https://learn.microsoft.com/zh-tw/azure/search/">Azure AI 搜尋服務文件</a></li>
+        <li><a href="https://github.com/msftsean/azure-ai-foundry-demo/blob/main/docs/rag-guide.md">Azure AI Foundry RAG
+            實作指南</a></li>
+        <li><a
+            href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/concepts/use-your-data?tabs=file-upload%2Ccopilot#streaming-data">串流資料</a>
+        </li>
+
+
+
         <li> <a
             href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0">什麼是
             Azure AI 文件智能？</a></li>
@@ -356,7 +386,8 @@
       <P>懶人包：賦予"A資源"一個你指定的角色，並把該角色的存取權限指定給"B使用者/資源"</P>
       <p>下圖是沒有分配角色時，會出現的錯誤</p>
       <img src="src\無身份錯誤.png" class="rd-image">
-      <p>第一點：賦予AI Serach Resource，2個角色(Serach Service Contributor、Searce Index Data Reader)，並把該角色的存取權限都指定給Azure OpenAI Resource</p>
+      <p>第一點：賦予AI Serach Resource，2個角色(Serach Service Contributor、Searce Index Data Reader)，並把該角色的存取權限都指定給Azure OpenAI
+        Resource</p>
       <img src="src\無身份錯誤2.png" class="rd-image">
 
       <p class="middletitle">實際操作</p>
