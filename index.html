@@ -25,7 +25,7 @@
           <div class="mid-btn">Azure問題</div>
           <div class="small-btns">
             <div class="small-btn" data-target="content-a3">Azure的計費機制</div>
-            <div class="small-btn" data-target="content-a4">LLM回答內容</div>
+            <div class="small-btn" data-target="content-a4">多模態內容回應</div>
             <div class="small-btn" data-target="content-a5">語系強制定義</div>
             <div class="small-btn" data-target="content-a6">自訂語音</div>
             <div class="small-btn" data-target="content-a7">Viseme 嘴型 </div>
@@ -35,12 +35,14 @@
           <div class="small-btns">
             <div class="small-btn" data-target="content-rag-1">簡介</div>
             <div class="small-btn" data-target="content-rag-2">角色分派</div>
+            <div class="small-btn" data-target="content-rag-3">PlayGround-RAG</div>
+            <div class="small-btn" data-target="content-rag-4">多模態資料</div>
           </div>
 
         </div>
       </div>
 
-      <div class="project" data-title="WebAR">
+      <!-- <div class="project" data-title="WebAR">
         <div class="big-btn">WebAR</div>
         <div class="mid-btns">
           <div class="mid-btn">專案理解</div>
@@ -56,9 +58,9 @@
             <div class="small-btn" data-target="content-b5">相關工具</div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="project" data-title="新技術分享">
+      <!-- <div class="project" data-title="新技術分享">
         <div class="big-btn">技術分享</div>
         <div class="mid-btns">
           <div class="mid-btn">3D</div>
@@ -66,7 +68,7 @@
             <div class="small-btn" data-target="content-c1">混元世界模型开源</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- #endregion  -->
 
@@ -92,6 +94,21 @@
     <!-- #region Azure專案概述 -->
     <div id="content-a1" data-time="2025-10-27">
       <h3 class="subtitle">概述</h3>
+
+      <p class="middletitle">期望運作方式</p>
+      <ol>
+        <li>透過點擊上傳檔案按鈕</li>
+        <li>呼叫產生SAS</li>
+        <li>轉成Byte</li>
+        <li>儲存Blob storage</li>
+        <li>啟用Content Understanding</li>
+      </ol>
+      </P>
+      <a
+        href="https://learn.microsoft.com/zh-tw/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works"></a>
+
+
+
       <p class="middletitle">Azure創建的資源</p>
       <p>Azure 裡面有很多功能服務都很相近，這邊以Service將功能區分</p>
 
@@ -139,38 +156,50 @@
 
     <!-- #region Azure的計費機制 -->
     <div id="content-a3" data-time="2025-10-17">
-      <h3 class="subtitle">Azure的計費機制</h3>
+      <h3 class="subtitle">計費方式概述</h3>
 
-      <p>在 Azure OpenAI Service 中，token 是依照輸入與輸出的文字量計算，不同模型與媒體類型（文字、圖片、語音）計費方式不一：</p>
-      <p class="middletitle">文字模型</p><br>
+      <p>Azure OpenAI 提供兩種主要計費選項：標準隨用隨付 (Standard On-Demand) 按實際使用的輸入和輸出 token 數計費，以及預配吞吐量單位 (Provisioned Throughput
+        Units, PTUs) 以固定成本提供可預測的定價，適合高容量應用。</p>
+      <p class="middletitle">文字 Token 計費</p><br>
+      <p>文字內容根據模型而異。對於 GPT-4o，輸入 token 成本為每百萬 token $2.50，輸出 token 為每百萬 token $10.00。 成本根據所使用的具體模型而異，例如 GPT-3.5-Turbo
+        的成本更低，而 o1 推理模型的成本更高。</p>
+
+      <p class="middletitle">圖片 Token 計費</p><br>
+      <P>A圖片的 token 計費涉及複雜的計算過程。低解析度模式將圖片編碼為 85 個 base token。 高解析度模式則需要多個步驟：</P>
+      <p class="littletitle">高解析度圖片的 Token 計算步驟：</p>
+      <ol class="outline">
+        <li>圖片調整大小：圖片首先調整到 2048 × 2048 像素的正方形內。如果最短邊大於 768 像素，再次調整使最短邊為 768 像素。</li>
+        <li>磁磚分割：調整後的圖片分割成 512 × 512 像素的磁磚，不完整的磁磚向上取整為完整磁磚。</li>
+        <li>Token 計算：
+          <ul>
+            <li>GPT-4o 和 GPT-4 Turbo with Vision：每個 512 × 512 像素磁磚成本為 170 token，加上 85 個 base token</li>
+            <li>GPT-4o mini：每個 512 × 512 像素磁磚成本為 5,667 token，加上 2,833 個 base token</li>
+          </ul>
+        </li>
+      </ol>
+
+      <p class="middletitle">音訊 Token 計費</p>
+      <p>音訊有兩種方式，計費方式也不同</p>
+      <p class="littletitle">多模態模型如 GPT-4o-Realtime 和 GPT-audio 將音訊內容轉換為 token：</p>
       <ul>
-        <li>Token 計算：Azure OpenAI 模型會將文本分解為 token 進行處理。每個 token 大約相當於四個字符。計費是基於每 1,000 個 token 的使用量。</li>
-        <li>輸入和輸出 Token：您需要為發送的輸入 token 和接收到的輸出 token 支付費用。例如，如果您發送 1,000 個 token 的請求並接收到 1,000 個 token 的回應，則總共計費 2,000
-          個 token。</li>
-        <li>不同模型的費率：不同的模型和部署類型會有不同的費率。具體的費率可以在 Azure OpenAI 定價頁面 上找到。</li>
+        <li>GPT-Realtime 音訊輸入：每百萬 token $32.00</li>
+        <li>GPT-Realtime 音訊輸出：每百萬 token $64.00n</li>
+      </ul>
+      <p class="littletitle">Azure Speech Services</p>
+      <ul>
+        <li>Text-to-Speech (TTS) 定價：計費單位：按字元數計費（per character）<ul></ul>
+        </li>
+        <li>Speech-to-Text (STT) 定價：計費單位：按音訊時長計費（per hour）</li>
       </ul>
 
-      <p class="middletitle">圖片生成（DALL·E）</p><br>
-      <P>Azure OpenAI 的影像處理功能，結合 GPT-4o、GPT-4o-mini 和 GPT-4 Turbo with Vision
-        模型，使用影像標記化來確定影像輸入所消耗的標記總數。消耗的標記數量是基於兩個主要因素計算：影像細節等級（低或高）和影像尺寸。標記成本的計算方法如下：</P>
+      <p class="middletitle">影像 (Sora) 計費</p>
+      <p>Azure 中的 Sora 2 影像生成 採用每秒計費模式，而非 token 計費：</p>
       <ul>
-        <li>圖像 token：圖像處理會將圖像分解為 token 進行計費。這些 token 的數量取決於圖像的細節和尺寸。</li>
-        <li>額外功能：例如，光學字符識別（OCR）和物體定位等增強功能會產生額外的費用。</li>
+        <li>Sora 2 標準版（720 × 1280 或 1280 × 720）：$0.10 美元/秒</li>
+        <li>Sora 2 專業版（1024 × 1792 或 1792 × 1024）：$0.20 美元/秒</li>
       </ul>
 
 
-      <p class="middletitle">語音 / 語音轉文字（Speech to Text / TTS）</p>
-      <p>Azure 現支援兩類主要語音型態：語音轉文字（Speech-to-Text, STT）及文字轉語音（Text-to-Speech, TTS）。主要依音訊長度（秒/小時）或每百萬字元計價。</p>
-      <p class="littletitle">語音轉文字（STT）</p>
-      <ul>
-        <li>標準即時轉錄：$1.00/小時（即時）；$0.369/小時（快速）；$0.181/小時（批次）</li>
-        <li>自訂模型：$1.20/小時（即時）；$0.225/小時（批次</li>
-      </ul>
-      <p class="littletitle">文字轉語音（TTS）</p>
-      <ul>
-        <li>神經語音合成（Neural TTS）：$15/百萬字元（標準）；$30/百萬字元（HD）；自訂語音 $24/百萬字元</li>
-        <li>- 語音服務即時模式按秒數/小時計費，支援多語、多發音人。最新 GPT 4o（即時語音對話）模型的價格以「音訊 Token」核算，最新型態亦支持按用量計費。</li>
-      </ul>
 
 
       <p class="middletitle">RAG(AI Serach)</p><br>
@@ -179,18 +208,12 @@
       </p>
       <img src="src\ai serach 每月固定收費.png" class="rd-image">
 
+      <p>目前使用基本層▼</p>
+      <img src="src\aiSearch_定價層.png" class="rd-image">
 
       <h3 class="subtitle">實際計費</h3>
-      <P> 目前在此專案中，有使用Azure Open AI、Speech To Text、Text To Speech、Custom Vision等資源</P>
+      <P>目前在此專案中，有使用Azure Open AI、Speech To Text、Text To Speech、Custom Vision等資源</P>
       <p>目前使用語言模型為GPT-4-Turbo，參照地點後的表格</p>
-
-      <p class="middletitle">驗證計費公式</p>
-      <ul>
-        <li> 找到 Billable 數字（實際計費單位數量）。</li>
-        <li> 對照 Rate（官方定價，依 1K tokens、每分鐘、每字元或每張圖片）。</li>
-        <li> 相乘後應該等於 Value（實際帳單金額）。</li>
-      </ul>
-
 
 
       <p class="middletitle">2025/9月帳單</p>
@@ -219,20 +242,41 @@
 
     <!-- #region 回答時除文字外，是否可以呈現圖片或影片等其他內容 -->
     <div id="content-a4" data-time="2025-10-17">
-      <h3 class="subtitle">回答時除文字外，是否可以呈現圖片或影片等其他內容</h3>
-      <ul>
+      <h3 class="subtitle">多模態內容回應</h3>
+      <p class="middletitle">簡易區分，生成與檢索回復兩個方式</p><br>
+
+      <p class="littletitle">內容生成：</p>
+      <ul class="outline">
         <li>圖片 → 用 LLM 產生 prompt，再丟給 DALL·E。</li>
         <li>影片 → 用 LLM 產生 prompt，再丟給 Sora（Azure AI Foundry 提供，Preview）。</li>
         <li>整合方式 → 建議讓 LLM 回覆 JSON，您的程式解析後決定要呼叫哪個生成 API。</li>
       </ul>
 
-      <a class="middletitle"
-        href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1">圖片生成-DALL·E</a>
-      <a class="middletitle"
-        href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/concepts/video-generation?tabs=python-entra">影片生成-Sora</a>
-      <a class="middletitle"
-        href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1">如何使用 Azure
-        OpenAI 影像生成模型</a>
+      <p class="littletitle">檢索回復：</p>
+
+
+      <br>
+
+      <br>
+
+
+      <h3 class="sorucelink">相關連結</h3>
+      <ul>
+        <li>
+          <a
+            href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1">圖片生成-DALL·E</a>
+        </li>
+        <li>
+          <a
+            href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/concepts/video-generation?tabs=python-entra">影片生成-Sora</a>
+        </li>
+        <li>
+          <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1">如何使用 Azure
+            OpenAI 影像生成模型</a>
+        </li>
+      </ul>
+
+
 
     </div>
     <!-- #endregion  -->
@@ -250,17 +294,6 @@
         <li>- Azure Speech Service：在 session 設定強制指定 locale: zh-TW</li>
         <li>- Azure Translator：REST API 輸出時設 to=zh-Hant（繁體中文），或語言自設定</li>
       </ul>
-
-
-      <h3 class="sorucelink">相關連結</h3>
-      <ul>
-        <li> <a href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest">opan ai 模型</a>
-        </li>
-        <li> <a href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/how-to/quota?tabs=rest">opan ai 模型</a>
-        </li>
-      </ul>
-
-
     </div>
     <!-- #endregion  -->
 
@@ -325,25 +358,28 @@
       <h3 class="subtitle">實作 RAG</h3>
 
       <p class="middletitle">RAG實作方法</p>
-      <p>目前Azure現有的方法，目前採用第一種方式</p>
+      <p>目前Azure現有的方法</p>
 
       <ol>
         <li>
+          <P><a
+              href="https://learn.microsoft.com/zh-tw/azure/search/tutorial-rag-build-solution?context=%2Fazure%2Fai-foundry%2Fcontext%2Fcontext">傳統方式</a>：自行建構解析Pipline，較困難，需要自己切分與內嵌
+          </P>
+        </li>
+        <li>
           <p>直接透過Azure AI Foundry的<a
               href="https://learn.microsoft.com/zh-tw/azure/ai-foundry/openai/use-your-data-quickstart?tabs=keyless%2Ctypescript-keyless%2Cpython-new&pivots=ai-foundry-portal#add-your-data-using-azure-ai-foundry-portal">playGround
-              /Add your data</a>去製作(不能使用免費層的AI Search Service)</p>
+              /Add your data</a>：僅限文字；不能使用免費層的AI Search Service</p>
         </li>
-        <li> <P><a
-            href="https://learn.microsoft.com/zh-tw/azure/search/tutorial-rag-build-solution?context=%2Fazure%2Fai-foundry%2Fcontext%2Fcontext">自己將資料作拆分索引</a>(較繁瑣複雜)</P>
-        </li>
+      </ol>
+      <p class="littletitle">傳統RAG製作步驟</p>
+      <ol>
+        <li>切分文字（chunking） ：</li>
       </ol>
 
 
-eca6a7ef-182f-4e97-af82-cf6c79a09df9
-
-
       <p class="middletitle">RAG製作的基本條件</p>
-      <ol>
+      <ol class="outline">
         <li>創建storage account 帳號</li>
         <li>於storage account 建立儲存體資源(圖片1)</li>
         <li>創建Ai Search Service 資源</li>
@@ -411,6 +447,60 @@ eca6a7ef-182f-4e97-af82-cf6c79a09df9
       </ul>
       <br>
     </div>
+
+    <div id="content-rag-3" data-time="2025-11-03">
+      <h3 class="subtitle">使用playGround實現RAG功能</h3>
+      <ol class="outline">
+        <li>在AI Foundry的playGround 使用Add your Data</li>
+        <li>上傳資料後，需要設置"文件索引(index_name)"；可透過更換index_name來變更RAG的內容</li>
+        <li>完成上傳後，點選檢視程式碼"，選擇json 與Azure OpenAI SDK，可以看到request的josn結構</li>
+        <li>自訂結構類別，且不須更換端點</li>
+        <li>確保reques的類別，有data_sources陣列，且不為空值</li>
+      </ol>
+      <br>
+    </div>
+
+    <div id="content-rag-4" data-time="2025-11-05">
+      <h3 class="subtitle">使用Content Understanding(內容理解)實現多模態"訊息增強"功能</h3>
+
+      <p class="littletitle">概觀</p>
+      <p>透過POST(輸入FileURL) > GET(Json) > Send Message list ="訊息增強"</p>
+      <p></p>
+
+      <p class="littletitle">簡易步驟</p>
+      <ol class="outline">
+        <li>透過foundry 內容理解(CU)的POST API 傳入url(公開網址/blob storage url)</li>
+        <li>POST後，會立即分析文字，需要一定時間，不會馬上回應，所以必須透過GET 持續請求(CU不會回傳成功通知)</li>
+        <li>Unity中CU腳本提供方法，供UI按鈕更換分析器，這裡影響post請求 與get接收的類別結構(每個分析器不同，目前僅有圖片與影片)</li>
+        <li>回傳後加入Message的陣列，所以本質上不能算完整的RAG</li>
+        <li>如果需要RAG 需要將cu解析後的數據 存回Add your data /或用內嵌模型 製作向量資料庫</li>
+      </ol>
+
+      <a
+        href="https://learn.microsoft.com/zh-tw/azure/ai-services/content-understanding/tutorial/create-custom-analyzer?tabs=video#sample-response">不同分析器，josn不同</a>
+
+
+      <p class="littletitle">詳細步驟</p>
+      <ol class="outline">
+        <li>在AI Foundry的playGround 使用內容理解</li>
+        <li>僅支援部分<a
+            href="https://learn.microsoft.com/zh-tw/azure/ai-services/content-understanding/language-region-support#region-support">地區</a>
+        </li>
+        <li>端點不能使用Foundry專案的端點，要使用Azure AI 服務的端點(Azure AI Foundry > 概觀 > 端點和金鑰)</li>
+        <li><img class="rd-image" src="src\內容理解的端點與金鑰位置.png"></li>
+        <li>使用post 請求，analyzerId可以參考<a
+            href="https://learn.microsoft.com/zh-tw/azure/ai-services/content-understanding/concepts/prebuilt-analyzers#prebuilt-analyzers-for-content-ingestion"></a>
+        </li>
+        <li></li>
+        <li></li>
+      </ol>
+      <br>
+    </div>
+
+
+
+
+
     <!-- #endregion  -->
 
     <!--#region webAr -->

@@ -175,17 +175,20 @@ a {
     border-style: solid;
 }
 
-ol,ul
-{
-    border-radius: 5px;
-    border-color: #00397a;
-    border-style: solid;
-    background-color: #1b1b1bce;
-    padding:  auto  ;
+ol,
+ul {
+    padding: auto;
 }
 
 li {
     margin-top: .6em;
-    font-weight:lighter;
+    font-weight: lighter;
     color: #ffffff;
+}
+
+.outline {
+    border-radius: 5px;
+    border-color: #00397a;
+    border-style: solid;
+    background-color: #1b1b1bce;
 }
